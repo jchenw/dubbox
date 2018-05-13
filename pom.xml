@@ -18,7 +18,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.alibaba</groupId>
 	<artifactId>dubbo-parent</artifactId>
-	<version>2.8.4</version>
+	<version>2.8.4.1</version>
 	<packaging>pom</packaging>
 	<name>${project.artifactId}</name>
 	<description>The parent project of dubbo</description>
@@ -51,7 +51,7 @@
 		<module>dubbo-admin</module>
 		<module>dubbo-demo</module>
 		<module>hessian-lite</module>
-        <!--<module>dubbo-tool/dubbo-demo-lite-archetype</module>-->
+        <!-- <module>dubbo-tool/dubbo-demo-lite-archetype</module> -->
 	</modules>
 	<profiles>
 		<profile>
@@ -83,20 +83,19 @@
 	<properties>
 		<!-- Common libs -->
 		<!-- <spring.bom.version>3.2.9.RELEASE</spring.bom.version> -->
-		<spring.bom.version>4.2.4.RELEASE</spring.bom.version>
+		<spring.bom.version>4.2.5.RELEASE</spring.bom.version>
 		<javassist_version>3.20.0-GA</javassist_version>
 		<!-- <netty_version>3.7.0.Final</netty_version> -->
 		<netty_version>3.9.9.Final</netty_version>
 		<mina_version>1.1.7</mina_version>
-		<!--<mina_version>2.0.9</mina_version>-->
 		<grizzly_version>2.1.4</grizzly_version>
 		<!-- <httpclient_version>4.2.1</httpclient_version> -->
 		<httpclient_version>4.3.4</httpclient_version>
 		<hessian_lite_version>3.2.1-fixed-2</hessian_lite_version>
 		<!-- <xstream_version>1.4.1</xstream_version> -->
 		<xstream_version>1.4.8</xstream_version>
-		<!-- <fastjson_version>1.2.28</fastjson_version> -->
-		<fastjson_version>1.2.6</fastjson_version>
+		<fastjson_version>1.2.28</fastjson_version>
+		<!-- <fastjson_version>1.2.6</fastjson_version> -->
 		<bsf_version>3.1</bsf_version>
 		<sorcerer_version>0.8</sorcerer_version>
 		
@@ -115,7 +114,8 @@
 		<servlet_version>3.1.0</servlet_version>
 		<jetty_version>6.1.26</jetty_version>
 		
-		<validation_version>1.0.0.GA</validation_version>
+		<!-- <validation_version>1.0.0.GA</validation_version> -->
+		<validation_version>1.1.0.Final</validation_version>
 		<!-- <hibernate_validator_version>4.2.0.Final</hibernate_validator_version> -->
 		<hibernate_validator_version>5.2.4.Final</hibernate_validator_version>
 		<jcache_version>0.4</jcache_version>
@@ -138,7 +138,8 @@
 		<!-- <logback_version>1.0.6</logback_version> -->
 		<logback_version>1.1.5</logback_version>
 		<!-- Test libs -->
-		<junit_version>4.10</junit_version>
+		<!-- <junit_version>4.10</junit_version> -->
+		<junit_version>4.12</junit_version>
 		<easymock_version>3.0</easymock_version>
 		<jmockit_version>0.999.8</jmockit_version>
 		
@@ -267,6 +268,12 @@
 				<groupId>com.101tec</groupId>
 				<artifactId>zkclient</artifactId>
 				<version>${zkclient_version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.curator</groupId>
@@ -529,7 +536,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin_version}</version>
@@ -599,7 +606,7 @@
 						</property>
 					</systemProperties>
 				</configuration>
-			</plugin> -->
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
@@ -764,4 +771,11 @@
 			<timezone>+8</timezone>
 		</developer>
 	</developers>
+	<!-- <distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>local private central nexus</name>
+			<url>http://localhost:8088/nexus/content/repositories/central</url>
+		</repository>
+	</distributionManagement> -->
 </project>

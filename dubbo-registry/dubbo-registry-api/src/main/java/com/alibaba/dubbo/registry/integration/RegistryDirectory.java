@@ -576,7 +576,15 @@ public class RegistryDirectory<T> extends AbstractDirectory<T> implements Notify
 
     public List<Invoker<T>> doList(Invocation invocation) {
         if (forbidden) {
-            throw new RpcException(RpcException.FORBIDDEN_EXCEPTION, "Forbid consumer " +  NetUtils.getLocalHost() + " access service " + getInterface().getName() + " from registry " + getUrl().getAddress() + " use dubbo version " + Version.getVersion() + ", Please check registry access list (whitelist/blacklist).");
+            if(!invocation.getAttachments ().isEmpty ()
+                    && invocation.getAttachments ().containsKey (Constants.INVOCATION_NEED_MOCK)
+                    && invocation.getAttachment (Constants.INVOCATION_NEED_MOCK).equals (Boolean.TRUE.toString ())){
+                if(logger.isInfoEnabled ()){
+                    logger.info ("如果开启了mock=ture ,则调用本地mock方法");//2018-5-3
+                };
+            }else{
+                throw new RpcException(RpcException.FORBIDDEN_EXCEPTION, "Forbid consumer " +  NetUtils.getLocalHost() + " access service " + getInterface().getName() + " from registry " + getUrl().getAddress() + " use dubbo version " + Version.getVersion() + ", Please check registry access list (whitelist/blacklist).");
+            }
         }
         List<Invoker<T>> invokers = null;
         Map<String, List<Invoker<T>>> localMethodInvokerMap = this.methodInvokerMap; // local reference
